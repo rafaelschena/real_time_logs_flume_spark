@@ -2,23 +2,51 @@
 
 ## Projeto nº6 da Formação Cientista de Dados da Data Science Academy
 
-***Disclaimer**: O projeto em questão tem apenas fins didáticos, desenvolvido em ambiente de teste e com dados públicos, sem qualquer preocupação com a segurança dos dados e sem a pretensão de servir de modelo para qualquer implementação em ambiente de produção.*
+***Disclaimer**: O projeto em questão tem apenas fins didáticos, desenvolvido em ambiente de teste e com dados públicos, sem qualquer preocupação com a segurança dos dados e sem a pretensão de servir de modelo para qualquer implementação em ambiente de produção. Os requisitos necessários para reprodução deste experimento são instalações funcionais do Apache Flume, Apache Hadoop e Apache Spark, com todos os requisitos necessários para cada um destes pacotes. Neste trabalho especificamente foi utilizada a máquina virtual fornecida pela Data Science Academy como ambiente de testes e desenvolvimento. Para utilização do Twitter como fonte do streaming de dados também são necessárias as chaves de acesso para desenvolvedor conforme mostrado adiante.*
 
 O objetivo deste projeto é criar um pipeline de dados em streaming com processamento em tempo real utilizando ferramentas do ecossistema Hadoop, como o Apache Flume para ingestão de dados, Apache HBase para armazenamento em *cluster* e Apache Spark para processamento em tempo real. Como fonte de dados em tempo real será utilizado o *Twitter*, que será acessado através da API para o Apache Flume. A figura 1 ilustra o fluxograma do processamento de dados, com os dados sendo coletados da fonte em tempo real pelo Apache Flume, armazenados no HBase e processados em tempo real com o Spark Streaming.
 
 ![Fluxograma](fig1.png)
 
 O projeto será executado em 3 etapas, a saber:
-1 - Estabelecimento do *Flume Agent* que coleta os dados do *Twitter* em tempo real, e distribui para duas *sinks*, o Apache HBase para armazenamento em *cluster* e o Spark Streaming para processamento em tempo real;
-2 - Armazenamento dos dados no cluster Hadoop através do Apache HBase;
-3 - Processamento dos dados em tempo real com o Spark Streaming.
+1. Estabelecimento do *Flume Agent* que coleta os dados do *Twitter* em tempo real, e distribui para duas *sinks*, o Apache HBase para armazenamento em *cluster* e o Spark Streaming para processamento em tempo real;
+2. Armazenamento dos dados no cluster Hadoop através do Apache HBase;
+3. Processamento dos dados em tempo real com o Spark Streaming.
+
 
 ## Etapa 1: Estabelecimento do *Flume Agent*:
 
-Primeiro exemplo executado com sucesso.
-http://flume.apache.org/releases/content/1.9.0/FlumeUserGuide.html#a-simple-example
+Para estabelecimento do *Flume agent* foi seguido o template mostrado na documentação do [Apache Flume](http://flume.apache.org/releases/content/1.9.0/FlumeUserGuide.html), conforme mostrado no exemplo abaixo, onde são declaradas as fontes, os *sinks* e os canais do agente, e em seguida cada um destes componentes são descritos:
 
-Alteração da source para o Twitter, seguindo a documentação do Apache Flume:
+```
+# example.conf: A single-node Flume configuration
+
+# Name the components on this agent
+a1.sources = r1
+a1.sinks = k1
+a1.channels = c1
+
+# Describe/configure the source
+a1.sources.r1.type = netcat
+a1.sources.r1.bind = localhost
+a1.sources.r1.port = 44444
+
+# Describe the sink
+a1.sinks.k1.type = logger
+
+# Use a channel which buffers events in memory
+a1.channels.c1.type = memory
+a1.channels.c1.capacity = 1000
+a1.channels.c1.transactionCapacity = 100
+
+# Bind the source and sink to the channel
+a1.sources.r1.channels = c1
+a1.sinks.k1.channel = c1
+```
+Para o estabelecimento de um agente como o mostrado na figura 1, é necessária a substituição da fonte r1 pela fonte do *Twitter*, a substituição da fonte k1 pela fonte do HBase e a criação de mais uma fonte do tipo *avro* para fazer a conexão com o Apache Spark.
+
+
+Alteração da fonte r1 para a fonte Twitter, seguindo a documentação do Apache Flume:
 
 ```
 a1.sources = r1
@@ -67,6 +95,7 @@ a1.sources.r1.channels = c1
 a1.sinks.k1.channel = c1
 ```
 
+Quando jogado os dados do Twitter para o console:
 ```
 [hadoop@dataserver Projeto_6]$ flume-ng agent --conf conf --conf-file example.conf --name a1 -Dflume.root.logger=INFO
 Info: Including Hadoop libraries found via (/opt/hadoop/bin/hadoop) for HDFS access
@@ -325,4 +354,95 @@ java.lang.NullPointerException: Inflater has been closed
 2021-05-26 20:29:33,840 INFO lifecycle.LifecycleSupervisor: Stopping lifecycle supervisor 10
 2021-05-26 20:29:33,846 INFO node.PollingPropertiesFileConfigurationProvider: Configuration provider stopping
 
+```
+
+Quando jogados dados do Telnet para o HDFS:
+```
+2021-05-27 21:04:46,877 ERROR hdfs.HDFSEventSink: process failed
+java.lang.NullPointerException: Expected timestamp in the Flume event headers, but it was null
+	at com.google.common.base.Preconditions.checkNotNull(Preconditions.java:204)
+	at org.apache.flume.formatter.output.BucketPath.replaceShorthand(BucketPath.java:251)
+	at org.apache.flume.formatter.output.BucketPath.escapeString(BucketPath.java:460)
+	at org.apache.flume.sink.hdfs.HDFSEventSink.process(HDFSEventSink.java:379)
+	at org.apache.flume.sink.DefaultSinkProcessor.process(DefaultSinkProcessor.java:67)
+	at org.apache.flume.SinkRunner$PollingRunner.run(SinkRunner.java:145)
+	at java.lang.Thread.run(Thread.java:748)
+
+```
+
+Quando jogados dados do Telnet para o HBase:
+```
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:361)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1141)
+2021-05-27 21:10:18,986 INFO zookeeper.ClientCnxn: Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2021-05-27 21:10:18,986 WARN zookeeper.ClientCnxn: Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:361)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1141)
+2021-05-27 21:10:18,987 WARN zookeeper.ReadOnlyZKClient: 0x74db17b1 to localhost:2181 failed for get of /hbase/hbaseid, code = CONNECTIONLOSS, retries = 19
+^C2021-05-27 21:10:20,087 INFO zookeeper.ClientCnxn: Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+2021-05-27 21:10:20,088 WARN zookeeper.ClientCnxn: Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:361)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1141)
+2021-05-27 21:10:20,189 INFO zookeeper.ClientCnxn: Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2021-05-27 21:10:20,189 WARN zookeeper.ClientCnxn: Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:361)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1141)
+2021-05-27 21:10:20,190 WARN zookeeper.ReadOnlyZKClient: 0x74db17b1 to localhost:2181 failed for get of /hbase/hbaseid, code = CONNECTIONLOSS, retries = 20
+^C^C2021-05-27 21:10:21,293 INFO zookeeper.ClientCnxn: Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+2021-05-27 21:10:21,294 WARN zookeeper.ClientCnxn: Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:361)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1141)
+2021-05-27 21:10:21,394 INFO zookeeper.ClientCnxn: Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2021-05-27 21:10:21,395 WARN zookeeper.ClientCnxn: Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:361)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1141)
+2021-05-27 21:10:21,397 WARN zookeeper.ReadOnlyZKClient: 0x74db17b1 to localhost:2181 failed for get of /hbase/hbaseid, code = CONNECTIONLOSS, retries = 21
+^C^C2021-05-27 21:10:22,497 INFO zookeeper.ClientCnxn: Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+2021-05-27 21:10:22,497 WARN zookeeper.ClientCnxn: Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:361)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1141)
+2021-05-27 21:10:22,598 INFO zookeeper.ClientCnxn: Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2021-05-27 21:10:22,599 WARN zookeeper.ClientCnxn: Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:361)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1141)
+2021-05-27 21:10:22,599 WARN zookeeper.ReadOnlyZKClient: 0x74db17b1 to localhost:2181 failed for get of /hbase/hbaseid, code = CONNECTIONLOSS, retries = 22
+2021-05-27 21:10:23,702 INFO zookeeper.ClientCnxn: Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+2021-05-27 21:10:23,703 WARN zookeeper.ClientCnxn: Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:361)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1141)
+2021-05-27 21:10:23,803 INFO zookeeper.ClientCnxn: Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2021-05-27 21:10:23,804 WARN zookeeper.ClientCnxn: Session 0x0 for server null, unexpected error, closing socket connection and attempting reconnect
+java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:361)
+	at org.apache.hadoop.hbase.shaded.org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1141)
+2021-05-27 21:10:23,804 WARN zookee
 ```
