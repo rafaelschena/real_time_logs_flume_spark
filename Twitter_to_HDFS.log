@@ -1,0 +1,524 @@
+[hadoop@dataserver Projeto_6]$ hdfs dfs -ls /
+Found 2 items
+drwxrwxrwx   - hadoop supergroup          0 2021-05-18 12:00 /tmp
+drwxrwxrwx   - hadoop supergroup          0 2021-05-18 12:03 /user
+
+[hadoop@dataserver Projeto_6]$ flume-ng agent --conf conf --conf-file agent.conf --name a1 -Dflume.root.logger=INFO,console
+Info: Including Hadoop libraries found via (/opt/hadoop/bin/hadoop) for HDFS access
+Info: Including HBASE libraries found via (/opt/hbase/bin/hbase) for HBASE access
+Error: Could not find or load main class org.apache.hadoop.hbase.util.GetJavaProperty
+Info: Including Hive libraries found via (/opt/hive) for Hive access
++ exec /opt/jdk/bin/java -Xmx20m -Dflume.root.logger=INFO,console -cp 'conf:/opt/flume/lib/*:/opt/hadoop/etc/hadoop:/opt/hadoop/share/hadoop/common/lib/*:/opt/hadoop/share/hadoop/common/*:/opt/hadoop/share/hadoop/hdfs:/opt/hadoop/share/hadoop/hdfs/lib/*:/opt/hadoop/share/hadoop/hdfs/*:/opt/hadoop/share/hadoop/mapreduce/lib/*:/opt/hadoop/share/hadoop/mapreduce/*:/opt/hadoop/share/hadoop/yarn:/opt/hadoop/share/hadoop/yarn/lib/*:/opt/hadoop/share/hadoop/yarn/*:/opt/hbase/conf:/opt/jdk//lib/tools.jar:/opt/hbase:/opt/hbase/lib/shaded-clients/hbase-shaded-client-byo-hadoop-2.2.0.jar:/opt/hbase/lib/client-facing-thirdparty/audience-annotations-0.5.0.jar:/opt/hbase/lib/client-facing-thirdparty/commons-logging-1.2.jar:/opt/hbase/lib/client-facing-thirdparty/findbugs-annotations-1.3.9-1.jar:/opt/hbase/lib/client-facing-thirdparty/htrace-core4-4.2.0-incubating.jar:/opt/hbase/lib/client-facing-thirdparty/log4j-1.2.17.jar:/opt/hbase/lib/client-facing-thirdparty/slf4j-api-1.7.25.jar:/opt/hadoop/etc/hadoop:/opt/hadoop/share/hadoop/common/lib/*:/opt/hadoop/share/hadoop/common/*:/opt/hadoop/share/hadoop/hdfs:/opt/hadoop/share/hadoop/hdfs/lib/*:/opt/hadoop/share/hadoop/hdfs/*:/opt/hadoop/share/hadoop/mapreduce/lib/*:/opt/hadoop/share/hadoop/mapreduce/*:/opt/hadoop/share/hadoop/yarn:/opt/hadoop/share/hadoop/yarn/lib/*:/opt/hadoop/share/hadoop/yarn/*:/opt/hbase/conf:/opt/hive/lib/*' -Djava.library.path=:/opt/hadoop/lib/native:/opt/hadoop/lib/native org.apache.flume.node.Application --conf-file agent.conf --name a1
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/opt/flume/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/hive/lib/log4j-slf4j-impl-2.10.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+log4j:ERROR setFile(null,true) call failed.
+java.io.FileNotFoundException: ./fairscheduler-statedump.log (Permission denied)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(FileOutputStream.java:270)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:133)
+	at org.apache.log4j.FileAppender.setFile(FileAppender.java:294)
+	at org.apache.log4j.RollingFileAppender.setFile(RollingFileAppender.java:207)
+	at org.apache.log4j.FileAppender.activateOptions(FileAppender.java:165)
+	at org.apache.log4j.config.PropertySetter.activate(PropertySetter.java:307)
+	at org.apache.log4j.config.PropertySetter.setProperties(PropertySetter.java:172)
+	at org.apache.log4j.config.PropertySetter.setProperties(PropertySetter.java:104)
+	at org.apache.log4j.PropertyConfigurator.parseAppender(PropertyConfigurator.java:842)
+	at org.apache.log4j.PropertyConfigurator.parseCategory(PropertyConfigurator.java:768)
+	at org.apache.log4j.PropertyConfigurator.parseCatsAndRenderers(PropertyConfigurator.java:672)
+	at org.apache.log4j.PropertyConfigurator.doConfigure(PropertyConfigurator.java:516)
+	at org.apache.log4j.PropertyConfigurator.doConfigure(PropertyConfigurator.java:580)
+	at org.apache.log4j.helpers.OptionConverter.selectAndConfigure(OptionConverter.java:526)
+	at org.apache.log4j.LogManager.<clinit>(LogManager.java:127)
+	at org.slf4j.impl.Log4jLoggerFactory.<init>(Log4jLoggerFactory.java:66)
+	at org.slf4j.impl.StaticLoggerBinder.<init>(StaticLoggerBinder.java:72)
+	at org.slf4j.impl.StaticLoggerBinder.<clinit>(StaticLoggerBinder.java:45)
+	at org.slf4j.LoggerFactory.bind(LoggerFactory.java:150)
+	at org.slf4j.LoggerFactory.performInitialization(LoggerFactory.java:124)
+	at org.slf4j.LoggerFactory.getILoggerFactory(LoggerFactory.java:412)
+	at org.slf4j.LoggerFactory.getLogger(LoggerFactory.java:357)
+	at org.slf4j.LoggerFactory.getLogger(LoggerFactory.java:383)
+	at org.apache.flume.node.Application.<clinit>(Application.java:61)
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+2021-05-29 19:33:04,093 INFO node.PollingPropertiesFileConfigurationProvider: Configuration provider starting
+2021-05-29 19:33:04,111 INFO node.PollingPropertiesFileConfigurationProvider: Reloading configuration file:agent.conf
+2021-05-29 19:33:04,114 INFO conf.FlumeConfiguration: Processing:k1
+2021-05-29 19:33:04,115 INFO conf.FlumeConfiguration: Processing:r1
+2021-05-29 19:33:04,115 INFO conf.FlumeConfiguration: Processing:k1
+2021-05-29 19:33:04,115 INFO conf.FlumeConfiguration: Processing:c1
+2021-05-29 19:33:04,115 INFO conf.FlumeConfiguration: Processing:r1
+2021-05-29 19:33:04,115 INFO conf.FlumeConfiguration: Processing:r1
+2021-05-29 19:33:04,115 INFO conf.FlumeConfiguration: Processing:r1
+2021-05-29 19:33:04,115 INFO conf.FlumeConfiguration: Added sinks: k1 Agent: a1
+2021-05-29 19:33:04,115 INFO conf.FlumeConfiguration: Processing:r1
+2021-05-29 19:33:04,115 INFO conf.FlumeConfiguration: Processing:k1
+2021-05-29 19:33:04,115 INFO conf.FlumeConfiguration: Processing:k1
+2021-05-29 19:33:04,115 INFO conf.FlumeConfiguration: Processing:k1
+2021-05-29 19:33:04,115 INFO conf.FlumeConfiguration: Processing:r1
+2021-05-29 19:33:04,115 INFO conf.FlumeConfiguration: Processing:r1
+2021-05-29 19:33:04,115 INFO conf.FlumeConfiguration: Processing:c1
+2021-05-29 19:33:04,115 INFO conf.FlumeConfiguration: Processing:r1
+2021-05-29 19:33:04,115 INFO conf.FlumeConfiguration: Processing:k1
+2021-05-29 19:33:04,115 INFO conf.FlumeConfiguration: Processing:k1
+2021-05-29 19:33:04,115 INFO conf.FlumeConfiguration: Processing:k1
+2021-05-29 19:33:04,115 INFO conf.FlumeConfiguration: Processing:c1
+2021-05-29 19:33:04,115 WARN conf.FlumeConfiguration: Agent configuration for 'a1' has no configfilters.
+2021-05-29 19:33:04,175 INFO conf.FlumeConfiguration: Post-validation flume configuration contains configuration for agents: [a1]
+2021-05-29 19:33:04,175 INFO node.AbstractConfigurationProvider: Creating channels
+2021-05-29 19:33:04,179 INFO channel.DefaultChannelFactory: Creating instance of channel c1 type memory
+2021-05-29 19:33:04,182 INFO node.AbstractConfigurationProvider: Created channel c1
+2021-05-29 19:33:04,182 INFO source.DefaultSourceFactory: Creating instance of source r1, type org.apache.flume.source.twitter.TwitterSource
+2021-05-29 19:33:04,534 INFO sink.DefaultSinkFactory: Creating instance of sink: k1, type: hdfs
+2021-05-29 19:33:04,540 INFO node.AbstractConfigurationProvider: Channel c1 connected to [r1, k1]
+2021-05-29 19:33:04,544 INFO node.Application: Starting new configuration:{ sourceRunners:{r1=EventDrivenSourceRunner: { source:org.apache.flume.source.twitter.TwitterSource{name:r1,state:IDLE} }} sinkRunners:{k1=SinkRunner: { policy:org.apache.flume.sink.DefaultSinkProcessor@3bfaafd6 counterGroup:{ name:null counters:{} } }} channels:{c1=org.apache.flume.channel.MemoryChannel{name: c1}} }
+2021-05-29 19:33:04,546 INFO node.Application: Starting Channel c1
+2021-05-29 19:33:04,582 INFO node.Application: Waiting for channel: c1 to start. Sleeping for 500 ms
+2021-05-29 19:33:04,725 INFO instrumentation.MonitoredCounterGroup: Monitored counter group for type: CHANNEL, name: c1: Successfully registered new MBean.
+2021-05-29 19:33:04,725 INFO instrumentation.MonitoredCounterGroup: Component type: CHANNEL, name: c1 started
+2021-05-29 19:33:05,083 INFO node.Application: Starting Sink k1
+2021-05-29 19:33:05,085 INFO node.Application: Starting Source r1
+2021-05-29 19:33:05,088 INFO twitter.TwitterSource: Starting twitter source org.apache.flume.source.twitter.TwitterSource{name:r1,state:IDLE} ...
+2021-05-29 19:33:05,094 INFO instrumentation.MonitoredCounterGroup: Monitored counter group for type: SINK, name: k1: Successfully registered new MBean.
+2021-05-29 19:33:05,094 INFO instrumentation.MonitoredCounterGroup: Component type: SINK, name: k1 started
+2021-05-29 19:33:05,103 INFO twitter.TwitterSource: Twitter source r1 started.
+2021-05-29 19:33:05,103 INFO twitter4j.TwitterStreamImpl: Establishing connection.
+2021-05-29 19:33:12,841 INFO twitter4j.TwitterStreamImpl: Connection established.
+2021-05-29 19:33:12,842 INFO twitter4j.TwitterStreamImpl: Receiving status stream.
+2021-05-29 19:33:14,133 INFO hdfs.HDFSSequenceFile: writeFormat = Writable, UseRawLocalFileSystem = false
+2021-05-29 19:33:14,375 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994132.tmp
+2021-05-29 19:33:15,426 INFO twitter.TwitterSource: Processed 100 docs
+2021-05-29 19:33:16,307 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994132.tmp
+2021-05-29 19:33:16,339 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994132.tmp to /flume/events/21-05-29/1930/00/events-.1622341994132
+2021-05-29 19:33:16,365 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994133.tmp
+2021-05-29 19:33:16,481 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994133.tmp
+2021-05-29 19:33:16,500 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994133.tmp to /flume/events/21-05-29/1930/00/events-.1622341994133
+2021-05-29 19:33:16,533 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994134.tmp
+2021-05-29 19:33:16,646 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994134.tmp
+2021-05-29 19:33:17,080 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994134.tmp to /flume/events/21-05-29/1930/00/events-.1622341994134
+2021-05-29 19:33:17,188 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994135.tmp
+2021-05-29 19:33:17,350 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994135.tmp
+2021-05-29 19:33:17,774 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994135.tmp to /flume/events/21-05-29/1930/00/events-.1622341994135
+2021-05-29 19:33:17,790 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994136.tmp
+2021-05-29 19:33:17,876 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994136.tmp
+2021-05-29 19:33:18,293 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994136.tmp to /flume/events/21-05-29/1930/00/events-.1622341994136
+2021-05-29 19:33:18,306 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994137.tmp
+2021-05-29 19:33:18,383 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994137.tmp
+2021-05-29 19:33:18,799 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994137.tmp to /flume/events/21-05-29/1930/00/events-.1622341994137
+2021-05-29 19:33:18,813 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994138.tmp
+2021-05-29 19:33:18,910 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994138.tmp
+2021-05-29 19:33:19,025 INFO twitter.TwitterSource: Processed 200 docs
+2021-05-29 19:33:19,325 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994138.tmp to /flume/events/21-05-29/1930/00/events-.1622341994138
+2021-05-29 19:33:19,352 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994139.tmp
+2021-05-29 19:33:19,419 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994139.tmp
+2021-05-29 19:33:19,873 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994139.tmp to /flume/events/21-05-29/1930/00/events-.1622341994139
+2021-05-29 19:33:19,884 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994140.tmp
+2021-05-29 19:33:19,952 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994140.tmp
+2021-05-29 19:33:20,368 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994140.tmp to /flume/events/21-05-29/1930/00/events-.1622341994140
+2021-05-29 19:33:20,386 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994141.tmp
+2021-05-29 19:33:20,450 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994141.tmp
+2021-05-29 19:33:20,888 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994141.tmp to /flume/events/21-05-29/1930/00/events-.1622341994141
+2021-05-29 19:33:20,899 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994142.tmp
+2021-05-29 19:33:20,967 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994142.tmp
+2021-05-29 19:33:21,125 INFO twitter.TwitterSource: Processed 300 docs
+2021-05-29 19:33:21,382 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994142.tmp to /flume/events/21-05-29/1930/00/events-.1622341994142
+2021-05-29 19:33:21,398 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994143.tmp
+2021-05-29 19:33:21,481 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994143.tmp
+2021-05-29 19:33:21,922 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994143.tmp to /flume/events/21-05-29/1930/00/events-.1622341994143
+2021-05-29 19:33:21,939 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994144.tmp
+2021-05-29 19:33:22,076 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994144.tmp
+2021-05-29 19:33:22,487 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994144.tmp to /flume/events/21-05-29/1930/00/events-.1622341994144
+2021-05-29 19:33:22,519 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994145.tmp
+2021-05-29 19:33:22,612 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994145.tmp
+2021-05-29 19:33:22,861 INFO twitter.TwitterSource: Processed 400 docs
+2021-05-29 19:33:23,029 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994145.tmp to /flume/events/21-05-29/1930/00/events-.1622341994145
+2021-05-29 19:33:23,048 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994146.tmp
+2021-05-29 19:33:23,115 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994146.tmp
+2021-05-29 19:33:23,125 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994146.tmp to /flume/events/21-05-29/1930/00/events-.1622341994146
+2021-05-29 19:33:23,142 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994147.tmp
+2021-05-29 19:33:23,218 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994147.tmp
+2021-05-29 19:33:23,227 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994147.tmp to /flume/events/21-05-29/1930/00/events-.1622341994147
+2021-05-29 19:33:23,237 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994148.tmp
+2021-05-29 19:33:23,324 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994148.tmp
+2021-05-29 19:33:23,332 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994148.tmp to /flume/events/21-05-29/1930/00/events-.1622341994148
+2021-05-29 19:33:23,360 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994149.tmp
+2021-05-29 19:33:23,463 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994149.tmp
+2021-05-29 19:33:23,476 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994149.tmp to /flume/events/21-05-29/1930/00/events-.1622341994149
+2021-05-29 19:33:23,490 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994150.tmp
+2021-05-29 19:33:23,533 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994150.tmp
+2021-05-29 19:33:23,556 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994150.tmp to /flume/events/21-05-29/1930/00/events-.1622341994150
+2021-05-29 19:33:23,569 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994151.tmp
+2021-05-29 19:33:23,711 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994151.tmp
+2021-05-29 19:33:23,721 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994151.tmp to /flume/events/21-05-29/1930/00/events-.1622341994151
+2021-05-29 19:33:23,768 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994152.tmp
+2021-05-29 19:33:23,884 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994152.tmp
+2021-05-29 19:33:23,894 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994152.tmp to /flume/events/21-05-29/1930/00/events-.1622341994152
+2021-05-29 19:33:23,946 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994153.tmp
+2021-05-29 19:33:23,982 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994153.tmp
+2021-05-29 19:33:24,000 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994153.tmp to /flume/events/21-05-29/1930/00/events-.1622341994153
+2021-05-29 19:33:24,012 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994154.tmp
+2021-05-29 19:33:24,101 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994154.tmp
+2021-05-29 19:33:24,108 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994154.tmp to /flume/events/21-05-29/1930/00/events-.1622341994154
+2021-05-29 19:33:24,121 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994155.tmp
+2021-05-29 19:33:24,230 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994155.tmp
+2021-05-29 19:33:24,236 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994155.tmp to /flume/events/21-05-29/1930/00/events-.1622341994155
+2021-05-29 19:33:24,272 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994156.tmp
+2021-05-29 19:33:24,379 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994156.tmp
+2021-05-29 19:33:24,403 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994156.tmp to /flume/events/21-05-29/1930/00/events-.1622341994156
+2021-05-29 19:33:24,416 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994157.tmp
+2021-05-29 19:33:24,479 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994157.tmp
+2021-05-29 19:33:24,497 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994157.tmp to /flume/events/21-05-29/1930/00/events-.1622341994157
+2021-05-29 19:33:24,520 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994158.tmp
+2021-05-29 19:33:24,611 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994158.tmp
+2021-05-29 19:33:24,618 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994158.tmp to /flume/events/21-05-29/1930/00/events-.1622341994158
+2021-05-29 19:33:24,629 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994159.tmp
+2021-05-29 19:33:24,693 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994159.tmp
+2021-05-29 19:33:24,701 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994159.tmp to /flume/events/21-05-29/1930/00/events-.1622341994159
+2021-05-29 19:33:24,716 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994160.tmp
+2021-05-29 19:33:24,833 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994160.tmp
+2021-05-29 19:33:24,842 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994160.tmp to /flume/events/21-05-29/1930/00/events-.1622341994160
+2021-05-29 19:33:24,853 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994161.tmp
+2021-05-29 19:33:24,905 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994161.tmp
+2021-05-29 19:33:24,938 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994161.tmp to /flume/events/21-05-29/1930/00/events-.1622341994161
+2021-05-29 19:33:24,948 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994162.tmp
+2021-05-29 19:33:25,030 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994162.tmp
+2021-05-29 19:33:25,037 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994162.tmp to /flume/events/21-05-29/1930/00/events-.1622341994162
+2021-05-29 19:33:25,050 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994163.tmp
+2021-05-29 19:33:25,137 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994163.tmp
+2021-05-29 19:33:25,147 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994163.tmp to /flume/events/21-05-29/1930/00/events-.1622341994163
+2021-05-29 19:33:25,176 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994164.tmp
+2021-05-29 19:33:25,256 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994164.tmp
+2021-05-29 19:33:25,262 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994164.tmp to /flume/events/21-05-29/1930/00/events-.1622341994164
+2021-05-29 19:33:25,273 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994165.tmp
+2021-05-29 19:33:25,323 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994165.tmp
+2021-05-29 19:33:25,348 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994165.tmp to /flume/events/21-05-29/1930/00/events-.1622341994165
+2021-05-29 19:33:25,364 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994166.tmp
+2021-05-29 19:33:25,466 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994166.tmp
+2021-05-29 19:33:25,475 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994166.tmp to /flume/events/21-05-29/1930/00/events-.1622341994166
+2021-05-29 19:33:25,488 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994167.tmp
+2021-05-29 19:33:25,530 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994167.tmp
+2021-05-29 19:33:25,557 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994167.tmp to /flume/events/21-05-29/1930/00/events-.1622341994167
+2021-05-29 19:33:25,585 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994168.tmp
+2021-05-29 19:33:25,676 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994168.tmp
+2021-05-29 19:33:25,692 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994168.tmp to /flume/events/21-05-29/1930/00/events-.1622341994168
+2021-05-29 19:33:25,704 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994169.tmp
+2021-05-29 19:33:25,779 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994169.tmp
+2021-05-29 19:33:25,789 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994169.tmp to /flume/events/21-05-29/1930/00/events-.1622341994169
+2021-05-29 19:33:25,844 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994170.tmp
+2021-05-29 19:33:25,901 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994170.tmp
+2021-05-29 19:33:25,910 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994170.tmp to /flume/events/21-05-29/1930/00/events-.1622341994170
+2021-05-29 19:33:25,920 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994171.tmp
+2021-05-29 19:33:25,987 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994171.tmp
+2021-05-29 19:33:25,997 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994171.tmp to /flume/events/21-05-29/1930/00/events-.1622341994171
+2021-05-29 19:33:26,016 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994172.tmp
+2021-05-29 19:33:26,090 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994172.tmp
+2021-05-29 19:33:26,100 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994172.tmp to /flume/events/21-05-29/1930/00/events-.1622341994172
+2021-05-29 19:33:26,115 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994173.tmp
+2021-05-29 19:33:26,182 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994173.tmp
+2021-05-29 19:33:26,188 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994173.tmp to /flume/events/21-05-29/1930/00/events-.1622341994173
+2021-05-29 19:33:26,203 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994174.tmp
+2021-05-29 19:33:26,244 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994174.tmp
+2021-05-29 19:33:26,252 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994174.tmp to /flume/events/21-05-29/1930/00/events-.1622341994174
+2021-05-29 19:33:26,287 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994175.tmp
+2021-05-29 19:33:26,345 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994175.tmp
+2021-05-29 19:33:26,352 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994175.tmp to /flume/events/21-05-29/1930/00/events-.1622341994175
+2021-05-29 19:33:26,367 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994176.tmp
+2021-05-29 19:33:26,451 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994176.tmp
+2021-05-29 19:33:26,466 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994176.tmp to /flume/events/21-05-29/1930/00/events-.1622341994176
+2021-05-29 19:33:26,476 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994177.tmp
+2021-05-29 19:33:26,543 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994177.tmp
+2021-05-29 19:33:26,550 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994177.tmp to /flume/events/21-05-29/1930/00/events-.1622341994177
+2021-05-29 19:33:26,560 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994178.tmp
+2021-05-29 19:33:26,623 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994178.tmp
+2021-05-29 19:33:26,630 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994178.tmp to /flume/events/21-05-29/1930/00/events-.1622341994178
+2021-05-29 19:33:26,642 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994179.tmp
+2021-05-29 19:33:26,675 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994179.tmp
+2021-05-29 19:33:26,686 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994179.tmp to /flume/events/21-05-29/1930/00/events-.1622341994179
+2021-05-29 19:33:26,698 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994180.tmp
+2021-05-29 19:33:26,780 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994180.tmp
+2021-05-29 19:33:26,807 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994180.tmp to /flume/events/21-05-29/1930/00/events-.1622341994180
+2021-05-29 19:33:26,819 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994181.tmp
+2021-05-29 19:33:26,891 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994181.tmp
+2021-05-29 19:33:26,898 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994181.tmp to /flume/events/21-05-29/1930/00/events-.1622341994181
+2021-05-29 19:33:26,916 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994182.tmp
+2021-05-29 19:33:27,005 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994182.tmp
+2021-05-29 19:33:27,012 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994182.tmp to /flume/events/21-05-29/1930/00/events-.1622341994182
+2021-05-29 19:33:27,022 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994183.tmp
+2021-05-29 19:33:28,621 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994183.tmp
+2021-05-29 19:33:28,642 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994183.tmp to /flume/events/21-05-29/1930/00/events-.1622341994183
+2021-05-29 19:33:28,654 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994184.tmp
+2021-05-29 19:33:29,044 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994184.tmp
+2021-05-29 19:33:29,048 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994184.tmp to /flume/events/21-05-29/1930/00/events-.1622341994184
+2021-05-29 19:33:29,058 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994185.tmp
+2021-05-29 19:33:29,509 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994185.tmp
+2021-05-29 19:33:29,520 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994185.tmp to /flume/events/21-05-29/1930/00/events-.1622341994185
+2021-05-29 19:33:29,534 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994186.tmp
+2021-05-29 19:33:29,617 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994186.tmp
+2021-05-29 19:33:29,631 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994186.tmp to /flume/events/21-05-29/1930/00/events-.1622341994186
+2021-05-29 19:33:29,647 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994187.tmp
+2021-05-29 19:33:29,963 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994187.tmp
+2021-05-29 19:33:29,972 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994187.tmp to /flume/events/21-05-29/1930/00/events-.1622341994187
+2021-05-29 19:33:29,985 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994188.tmp
+2021-05-29 19:33:30,077 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994188.tmp
+2021-05-29 19:33:30,087 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994188.tmp to /flume/events/21-05-29/1930/00/events-.1622341994188
+2021-05-29 19:33:30,107 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994189.tmp
+2021-05-29 19:33:30,202 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994189.tmp
+2021-05-29 19:33:30,209 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994189.tmp to /flume/events/21-05-29/1930/00/events-.1622341994189
+2021-05-29 19:33:30,221 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994190.tmp
+2021-05-29 19:33:30,251 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994190.tmp
+2021-05-29 19:33:30,264 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994190.tmp to /flume/events/21-05-29/1930/00/events-.1622341994190
+2021-05-29 19:33:30,274 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994191.tmp
+2021-05-29 19:33:30,350 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994191.tmp
+2021-05-29 19:33:30,358 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994191.tmp to /flume/events/21-05-29/1930/00/events-.1622341994191
+2021-05-29 19:33:30,371 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994192.tmp
+2021-05-29 19:33:30,406 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994192.tmp
+2021-05-29 19:33:30,436 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994192.tmp to /flume/events/21-05-29/1930/00/events-.1622341994192
+2021-05-29 19:33:30,446 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994193.tmp
+2021-05-29 19:33:30,467 INFO twitter.TwitterSource: Processed 500 docs
+2021-05-29 19:33:30,557 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994193.tmp
+2021-05-29 19:33:30,567 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994193.tmp to /flume/events/21-05-29/1930/00/events-.1622341994193
+2021-05-29 19:33:30,577 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994194.tmp
+2021-05-29 19:33:30,660 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994194.tmp
+2021-05-29 19:33:30,759 WARN hdfs.DataStreamer: Caught exception
+java.lang.InterruptedException
+	at java.lang.Object.wait(Native Method)
+	at java.lang.Thread.join(Thread.java:1252)
+	at java.lang.Thread.join(Thread.java:1326)
+	at org.apache.hadoop.hdfs.DataStreamer.closeResponder(DataStreamer.java:986)
+	at org.apache.hadoop.hdfs.DataStreamer.endBlock(DataStreamer.java:640)
+	at org.apache.hadoop.hdfs.DataStreamer.run(DataStreamer.java:810)
+2021-05-29 19:33:30,770 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994194.tmp to /flume/events/21-05-29/1930/00/events-.1622341994194
+2021-05-29 19:33:30,781 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994195.tmp
+2021-05-29 19:33:30,850 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994195.tmp
+2021-05-29 19:33:30,860 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994195.tmp to /flume/events/21-05-29/1930/00/events-.1622341994195
+2021-05-29 19:33:30,878 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994196.tmp
+2021-05-29 19:33:30,966 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994196.tmp
+2021-05-29 19:33:30,972 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994196.tmp to /flume/events/21-05-29/1930/00/events-.1622341994196
+2021-05-29 19:33:30,983 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994197.tmp
+2021-05-29 19:33:31,042 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994197.tmp
+2021-05-29 19:33:31,049 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994197.tmp to /flume/events/21-05-29/1930/00/events-.1622341994197
+2021-05-29 19:33:31,060 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994198.tmp
+2021-05-29 19:33:31,115 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994198.tmp
+2021-05-29 19:33:31,131 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994198.tmp to /flume/events/21-05-29/1930/00/events-.1622341994198
+2021-05-29 19:33:31,141 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994199.tmp
+2021-05-29 19:33:31,197 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994199.tmp
+2021-05-29 19:33:31,209 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994199.tmp to /flume/events/21-05-29/1930/00/events-.1622341994199
+2021-05-29 19:33:31,222 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994200.tmp
+2021-05-29 19:33:31,277 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994200.tmp
+2021-05-29 19:33:31,283 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994200.tmp to /flume/events/21-05-29/1930/00/events-.1622341994200
+2021-05-29 19:33:31,295 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994201.tmp
+2021-05-29 19:33:31,376 INFO twitter.TwitterSource: Processed 600 docs
+2021-05-29 19:33:31,428 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994201.tmp
+2021-05-29 19:33:31,433 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994201.tmp to /flume/events/21-05-29/1930/00/events-.1622341994201
+2021-05-29 19:33:31,456 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994202.tmp
+2021-05-29 19:33:31,491 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994202.tmp
+2021-05-29 19:33:31,515 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994202.tmp to /flume/events/21-05-29/1930/00/events-.1622341994202
+2021-05-29 19:33:31,527 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994203.tmp
+2021-05-29 19:33:31,612 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994203.tmp
+2021-05-29 19:33:31,617 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994203.tmp to /flume/events/21-05-29/1930/00/events-.1622341994203
+2021-05-29 19:33:31,626 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994204.tmp
+2021-05-29 19:33:31,690 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994204.tmp
+2021-05-29 19:33:31,700 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994204.tmp to /flume/events/21-05-29/1930/00/events-.1622341994204
+2021-05-29 19:33:31,713 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994205.tmp
+2021-05-29 19:33:31,773 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994205.tmp
+2021-05-29 19:33:31,783 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994205.tmp to /flume/events/21-05-29/1930/00/events-.1622341994205
+2021-05-29 19:33:31,796 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994206.tmp
+2021-05-29 19:33:31,914 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994206.tmp
+2021-05-29 19:33:31,934 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994206.tmp to /flume/events/21-05-29/1930/00/events-.1622341994206
+2021-05-29 19:33:31,946 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994207.tmp
+2021-05-29 19:33:32,737 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994207.tmp
+2021-05-29 19:33:32,743 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994207.tmp to /flume/events/21-05-29/1930/00/events-.1622341994207
+2021-05-29 19:33:32,755 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994208.tmp
+2021-05-29 19:33:32,983 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994208.tmp
+2021-05-29 19:33:32,991 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994208.tmp to /flume/events/21-05-29/1930/00/events-.1622341994208
+2021-05-29 19:33:33,007 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994209.tmp
+2021-05-29 19:33:33,238 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994209.tmp
+2021-05-29 19:33:33,244 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994209.tmp to /flume/events/21-05-29/1930/00/events-.1622341994209
+2021-05-29 19:33:33,255 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994210.tmp
+2021-05-29 19:33:33,551 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994210.tmp
+2021-05-29 19:33:33,556 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994210.tmp to /flume/events/21-05-29/1930/00/events-.1622341994210
+2021-05-29 19:33:33,566 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994211.tmp
+2021-05-29 19:33:33,800 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994211.tmp
+2021-05-29 19:33:33,807 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994211.tmp to /flume/events/21-05-29/1930/00/events-.1622341994211
+2021-05-29 19:33:33,817 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994212.tmp
+2021-05-29 19:33:33,839 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994212.tmp
+^C^X2021-05-29 19:33:33,877 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994212.tmp to /flume/events/21-05-29/1930/00/events-.1622341994212
+2021-05-29 19:33:33,899 INFO hdfs.BucketWriter: Creating /flume/events/21-05-29/1930/00/events-.1622341994213.tmp
+2021-05-29 19:33:33,945 INFO node.Application: Shutting down configuration: { sourceRunners:{r1=EventDrivenSourceRunner: { source:org.apache.flume.source.twitter.TwitterSource{name:r1,state:START} }} sinkRunners:{k1=SinkRunner: { policy:org.apache.flume.sink.DefaultSinkProcessor@3bfaafd6 counterGroup:{ name:null counters:{runner.backoffs.consecutive=2, runner.backoffs=2} } }} channels:{c1=org.apache.flume.channel.MemoryChannel{name: c1}} }
+2021-05-29 19:33:33,946 INFO node.Application: Stopping Source r1
+2021-05-29 19:33:33,946 INFO lifecycle.LifecycleSupervisor: Stopping component: EventDrivenSourceRunner: { source:org.apache.flume.source.twitter.TwitterSource{name:r1,state:START} }
+2021-05-29 19:33:33,946 INFO twitter.TwitterSource: Twitter source r1 stopping...
+2021-05-29 19:33:34,756 INFO twitter4j.TwitterStreamImpl: Inflater has been closed
+2021-05-29 19:33:34,756 ERROR twitter.TwitterSource: Exception while streaming tweets
+java.lang.NullPointerException: Inflater has been closed
+	at java.util.zip.Inflater.ensureOpen(Inflater.java:389)
+	at java.util.zip.Inflater.inflate(Inflater.java:257)
+	at java.util.zip.InflaterInputStream.read(InflaterInputStream.java:152)
+	at java.util.zip.GZIPInputStream.read(GZIPInputStream.java:117)
+	at sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:284)
+	at sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:326)
+	at sun.nio.cs.StreamDecoder.read(StreamDecoder.java:178)
+	at java.io.InputStreamReader.read(InputStreamReader.java:184)
+	at java.io.BufferedReader.fill(BufferedReader.java:161)
+	at java.io.BufferedReader.readLine(BufferedReader.java:324)
+	at java.io.BufferedReader.readLine(BufferedReader.java:389)
+	at twitter4j.StatusStreamBase.handleNextElement(StatusStreamBase.java:85)
+	at twitter4j.StatusStreamImpl.next(StatusStreamImpl.java:57)
+	at twitter4j.TwitterStreamImpl$TwitterStreamConsumer.run(TwitterStreamImpl.java:478)
+2021-05-29 19:33:34,757 INFO twitter.TwitterSource: Twitter source r1 stopped.
+2021-05-29 19:33:34,758 INFO node.Application: Stopping Sink k1
+2021-05-29 19:33:34,758 INFO lifecycle.LifecycleSupervisor: Stopping component: SinkRunner: { policy:org.apache.flume.sink.DefaultSinkProcessor@3bfaafd6 counterGroup:{ name:null counters:{runner.backoffs.consecutive=2, runner.backoffs=2} } }
+2021-05-29 19:33:34,759 ERROR hdfs.HDFSEventSink: process failed
+java.lang.InterruptedException: Timed out before HDFS call was made. Your hdfs.callTimeout might be set too low or HDFS calls are taking too long.
+	at org.apache.flume.sink.hdfs.BucketWriter.checkAndThrowInterruptedException(BucketWriter.java:708)
+	at org.apache.flume.sink.hdfs.BucketWriter.flush(BucketWriter.java:477)
+	at org.apache.flume.sink.hdfs.HDFSEventSink.process(HDFSEventSink.java:441)
+	at org.apache.flume.sink.DefaultSinkProcessor.process(DefaultSinkProcessor.java:67)
+	at org.apache.flume.SinkRunner$PollingRunner.run(SinkRunner.java:145)
+	at java.lang.Thread.run(Thread.java:748)
+2021-05-29 19:33:34,759 ERROR flume.SinkRunner: Unable to deliver event. Exception follows.
+org.apache.flume.EventDeliveryException: java.lang.InterruptedException: Timed out before HDFS call was made. Your hdfs.callTimeout might be set too low or HDFS calls are taking too long.
+	at org.apache.flume.sink.hdfs.HDFSEventSink.process(HDFSEventSink.java:464)
+	at org.apache.flume.sink.DefaultSinkProcessor.process(DefaultSinkProcessor.java:67)
+	at org.apache.flume.SinkRunner$PollingRunner.run(SinkRunner.java:145)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.InterruptedException: Timed out before HDFS call was made. Your hdfs.callTimeout might be set too low or HDFS calls are taking too long.
+	at org.apache.flume.sink.hdfs.BucketWriter.checkAndThrowInterruptedException(BucketWriter.java:708)
+	at org.apache.flume.sink.hdfs.BucketWriter.flush(BucketWriter.java:477)
+	at org.apache.flume.sink.hdfs.HDFSEventSink.process(HDFSEventSink.java:441)
+	... 3 more
+^C2021-05-29 19:33:39,760 INFO hdfs.HDFSEventSink: Closing /flume/events/21-05-29/1930/00/events-
+2021-05-29 19:33:39,777 INFO hdfs.BucketWriter: Closing /flume/events/21-05-29/1930/00/events-.1622341994213.tmp
+2021-05-29 19:33:39,791 INFO hdfs.BucketWriter: Renaming /flume/events/21-05-29/1930/00/events-.1622341994213.tmp to /flume/events/21-05-29/1930/00/events-.1622341994213
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Component type: SINK, name: k1 stopped
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: k1. sink.start.time == 1622341985094
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: k1. sink.stop.time == 1622342019800
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: k1. sink.batch.complete == 0
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: k1. sink.batch.empty == 2
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: k1. sink.batch.underflow == 1
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: k1. sink.channel.read.fail == 0
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: k1. sink.connection.closed.count == 82
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: k1. sink.connection.creation.count == 82
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: k1. sink.connection.failed.count == 0
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: k1. sink.event.drain.attempt == 82
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: k1. sink.event.drain.sucess == 0
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: SINK, name: k1. sink.event.write.fail == 1
+2021-05-29 19:33:39,801 INFO node.Application: Stopping Channel c1
+2021-05-29 19:33:39,801 INFO lifecycle.LifecycleSupervisor: Stopping component: org.apache.flume.channel.MemoryChannel{name: c1}
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Component type: CHANNEL, name: c1 stopped
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: c1. channel.start.time == 1622341984725
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: c1. channel.stop.time == 1622342019801
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: c1. channel.capacity == 1000
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: c1. channel.current.size == 82
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: c1. channel.event.put.attempt == 82
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: c1. channel.event.put.success == 82
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: c1. channel.event.take.attempt == 85
+2021-05-29 19:33:39,801 INFO instrumentation.MonitoredCounterGroup: Shutdown Metric for type: CHANNEL, name: c1. channel.event.take.success == 0
+2021-05-29 19:33:39,801 INFO lifecycle.LifecycleSupervisor: Stopping lifecycle supervisor 10
+2021-05-29 19:33:39,802 INFO lifecycle.LifecycleSupervisor: Component has already been stopped SinkRunner: { policy:org.apache.flume.sink.DefaultSinkProcessor@3bfaafd6 counterGroup:{ name:null counters:{runner.deliveryErrors=1, runner.backoffs.consecutive=2, runner.backoffs=2} } }
+2021-05-29 19:33:39,803 INFO node.PollingPropertiesFileConfigurationProvider: Configuration provider stopping
+[hadoop@dataserver Projeto_6]$ hdfs dfs -ls /
+Found 3 items
+drwxrwxrwx   - hadoop supergroup          0 2021-05-29 19:33 /flume
+drwxrwxrwx   - hadoop supergroup          0 2021-05-18 12:00 /tmp
+drwxrwxrwx   - hadoop supergroup          0 2021-05-18 12:03 /user
+[hadoop@dataserver Projeto_6]$ hdfs dfs -ls /flume
+Found 1 items
+drwxrwxrwx   - hadoop supergroup          0 2021-05-29 19:33 /flume/events
+[hadoop@dataserver Projeto_6]$ hdfs dfs -ls /flume/events
+Found 1 items
+drwxrwxrwx   - hadoop supergroup          0 2021-05-29 19:33 /flume/events/21-05-29
+[hadoop@dataserver Projeto_6]$ hdfs dfs -ls /flume/events/21-05-29
+Found 1 items
+drwxrwxrwx   - hadoop supergroup          0 2021-05-29 19:33 /flume/events/21-05-29/1930
+[hadoop@dataserver Projeto_6]$ hdfs dfs -ls /flume/events/21-05-29/1930
+Found 1 items
+drwxrwxrwx   - hadoop supergroup          0 2021-05-29 19:33 /flume/events/21-05-29/1930/00
+[hadoop@dataserver Projeto_6]$ hdfs dfs -ls /flume/events/21-05-29/1930/00
+Found 82 items
+-rw-r--r--   1 hadoop supergroup       1491 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994132
+-rw-r--r--   1 hadoop supergroup       3487 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994133
+-rw-r--r--   1 hadoop supergroup       5066 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994134
+-rw-r--r--   1 hadoop supergroup       4533 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994135
+-rw-r--r--   1 hadoop supergroup       5486 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994136
+-rw-r--r--   1 hadoop supergroup       5367 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994137
+-rw-r--r--   1 hadoop supergroup       4389 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994138
+-rw-r--r--   1 hadoop supergroup       4849 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994139
+-rw-r--r--   1 hadoop supergroup       3604 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994140
+-rw-r--r--   1 hadoop supergroup       5810 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994141
+-rw-r--r--   1 hadoop supergroup       5672 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994142
+-rw-r--r--   1 hadoop supergroup       5354 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994143
+-rw-r--r--   1 hadoop supergroup       2994 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994144
+-rw-r--r--   1 hadoop supergroup       4843 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994145
+-rw-r--r--   1 hadoop supergroup       5702 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994146
+-rw-r--r--   1 hadoop supergroup       4604 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994147
+-rw-r--r--   1 hadoop supergroup       3666 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994148
+-rw-r--r--   1 hadoop supergroup       4989 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994149
+-rw-r--r--   1 hadoop supergroup       5371 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994150
+-rw-r--r--   1 hadoop supergroup       6187 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994151
+-rw-r--r--   1 hadoop supergroup       4776 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994152
+-rw-r--r--   1 hadoop supergroup       5309 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994153
+-rw-r--r--   1 hadoop supergroup       4215 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994154
+-rw-r--r--   1 hadoop supergroup       4299 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994155
+-rw-r--r--   1 hadoop supergroup       5369 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994156
+-rw-r--r--   1 hadoop supergroup       3193 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994157
+-rw-r--r--   1 hadoop supergroup       5613 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994158
+-rw-r--r--   1 hadoop supergroup       4932 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994159
+-rw-r--r--   1 hadoop supergroup       5855 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994160
+-rw-r--r--   1 hadoop supergroup       2053 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994161
+-rw-r--r--   1 hadoop supergroup       5143 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994162
+-rw-r--r--   1 hadoop supergroup       5403 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994163
+-rw-r--r--   1 hadoop supergroup       6261 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994164
+-rw-r--r--   1 hadoop supergroup       4854 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994165
+-rw-r--r--   1 hadoop supergroup       5001 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994166
+-rw-r--r--   1 hadoop supergroup       5103 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994167
+-rw-r--r--   1 hadoop supergroup       4920 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994168
+-rw-r--r--   1 hadoop supergroup       5886 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994169
+-rw-r--r--   1 hadoop supergroup       5562 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994170
+-rw-r--r--   1 hadoop supergroup       5561 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994171
+-rw-r--r--   1 hadoop supergroup       5133 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994172
+-rw-r--r--   1 hadoop supergroup       5435 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994173
+-rw-r--r--   1 hadoop supergroup       6120 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994174
+-rw-r--r--   1 hadoop supergroup       4475 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994175
+-rw-r--r--   1 hadoop supergroup       2952 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994176
+-rw-r--r--   1 hadoop supergroup       5334 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994177
+-rw-r--r--   1 hadoop supergroup       5434 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994178
+-rw-r--r--   1 hadoop supergroup       4943 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994179
+-rw-r--r--   1 hadoop supergroup       2547 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994180
+-rw-r--r--   1 hadoop supergroup       1920 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994181
+-rw-r--r--   1 hadoop supergroup       2658 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994182
+-rw-r--r--   1 hadoop supergroup       1409 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994183
+-rw-r--r--   1 hadoop supergroup       1432 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994184
+-rw-r--r--   1 hadoop supergroup       1391 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994185
+-rw-r--r--   1 hadoop supergroup       1652 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994186
+-rw-r--r--   1 hadoop supergroup       4811 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994187
+-rw-r--r--   1 hadoop supergroup       2305 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994188
+-rw-r--r--   1 hadoop supergroup       5861 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994189
+-rw-r--r--   1 hadoop supergroup       4897 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994190
+-rw-r--r--   1 hadoop supergroup       1820 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994191
+-rw-r--r--   1 hadoop supergroup       5850 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994192
+-rw-r--r--   1 hadoop supergroup       5441 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994193
+-rw-r--r--   1 hadoop supergroup       4176 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994194
+-rw-r--r--   1 hadoop supergroup       5502 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994195
+-rw-r--r--   1 hadoop supergroup       5683 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994196
+-rw-r--r--   1 hadoop supergroup       5490 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994197
+-rw-r--r--   1 hadoop supergroup       4099 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994198
+-rw-r--r--   1 hadoop supergroup       5774 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994199
+-rw-r--r--   1 hadoop supergroup       6427 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994200
+-rw-r--r--   1 hadoop supergroup       5509 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994201
+-rw-r--r--   1 hadoop supergroup       5627 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994202
+-rw-r--r--   1 hadoop supergroup       1586 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994203
+-rw-r--r--   1 hadoop supergroup       5683 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994204
+-rw-r--r--   1 hadoop supergroup       4541 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994205
+-rw-r--r--   1 hadoop supergroup       5340 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994206
+-rw-r--r--   1 hadoop supergroup       4281 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994207
+-rw-r--r--   1 hadoop supergroup       3575 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994208
+-rw-r--r--   1 hadoop supergroup       1483 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994209
+-rw-r--r--   1 hadoop supergroup       3264 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994210
+-rw-r--r--   1 hadoop supergroup       3497 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994211
+-rw-r--r--   1 hadoop supergroup       4440 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994212
+-rw-r--r--   1 hadoop supergroup       5097 2021-05-29 19:33 /flume/events/21-05-29/1930/00/events-.1622341994213
+[hadoop@dataserver Projeto_6]$ hdfs dfs -cat /flume/events/21-05-29/1930/00/events-.1622341994132
+{"type":"record","name":"Doc","doc":"adoc","fields":[{"name":"id","type":"string"},{"name":"user_friends_count","type":["int","null"]},{"name":"user_location","type":["string","null"]},{"name":"user_description","type":["string","null"]},{"name":"user_statuses_count","type":["int","null"]},{"name":"user_followers_count","type":["int","null"]},{"name":"user_name","type":["string","null"]},{"name":"user_screen_name","type":["string","null"]},{"name":"created_at","type":["string","null"]},{"name":"text","type":["string","null"]},{"name":"retweet_count","type":["long","null"]},{"name":"retweeted","type":["boolean","null"]},{"name":"in_reply_to_user_id","type":["long","null"]},{"name":"source","type":["string","null"]},{"name":"in_reply_to_status_id","type":["long","null"]},{"name":"media_url_https","type":["string","null"]},{"name":"expanded_url","type":["string","null"]}]}��WH�6~�!���F,��&1398829798672125957�in yours prayer>Laugh with many, dont trust any��👻Fareezaizat17(2021-05-29T19:33:07Z�RT @kucenmeow: Hello pulis, ada orang tak reti jaga jarak. https://t.co/I5zHp1RiZU�<a href="http://twitter.com/download/android" rel="nofollow">Twitter for Android</a>^https://pbs.twimg.com/media/E2hlXcOUYAQUUWM.jpg�https://twitter.com/kucenmeow/status/1398479150411780096/photo/1��WH�6~�!���F,������$ n�@�����e�$o
