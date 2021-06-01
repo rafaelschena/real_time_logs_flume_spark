@@ -19,4 +19,15 @@ Solução: descrita na própria documentação do Flume, em: http://flume.apache
 Configurar o parâmetro da sink hdfs.useLocalTimeStamp como true.
 
 
+## 2 - Replicando o streaming do Twitter para uma sink Avro:
+Foi obtida a seguinte mensagem de erro:
+2021-05-31 19:56:42,428 ERROR flume.SinkRunner: Unable to deliver event. Exception follows.
+org.apache.flume.EventDeliveryException: Failed to send events
+O erro foi causado por uma configuração incorreta do agente Flume. Quando a fonte está conectada a mais de um canal, a descrição do fluxo deve ser feita conforme o exemplo abaixo:
+```
+# Descrevendo o fluxo de dados
+a1.sources.r1.channels = c1 c2
+a1.sinks.k1.channel = c1
+a1.sinks.k2.channel = c2
+```
 
