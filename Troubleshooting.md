@@ -31,3 +31,44 @@ a1.sinks.k1.channel = c1
 a1.sinks.k2.channel = c2
 ```
 
+# 3 - Enviando dados para a sink Avro:
+Foi obtida a seguinte mensagem de erro:
+2021-05-31 21:18:12,169 ERROR flume.SinkRunner: Unable to deliver event. Exception follows.
+org.apache.flume.EventDeliveryException: Failed to send events
+	at org.apache.flume.sink.AbstractRpcSink.process(AbstractRpcSink.java:398)
+	at org.apache.flume.sink.DefaultSinkProcessor.process(DefaultSinkProcessor.java:67)
+	at org.apache.flume.SinkRunner$PollingRunner.run(SinkRunner.java:145)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.flume.FlumeException: NettyAvroRpcClient { host: localhost, port: 4545 }: RPC connection error
+	at org.apache.flume.api.NettyAvroRpcClient.connect(NettyAvroRpcClient.java:177)
+	at org.apache.flume.api.NettyAvroRpcClient.connect(NettyAvroRpcClient.java:115)
+	at org.apache.flume.api.NettyAvroRpcClient.configure(NettyAvroRpcClient.java:598)
+	at org.apache.flume.api.RpcClientFactory.getInstance(RpcClientFactory.java:90)
+	at org.apache.flume.sink.AvroSink.initializeRpcClient(AvroSink.java:114)
+	at org.apache.flume.sink.AbstractRpcSink.createConnection(AbstractRpcSink.java:217)
+	at org.apache.flume.sink.AbstractRpcSink.verifyConnection(AbstractRpcSink.java:277)
+	at org.apache.flume.sink.AbstractRpcSink.process(AbstractRpcSink.java:353)
+	... 3 more
+Caused by: java.io.IOException: Error connecting to localhost/127.0.0.1:4545
+	at org.apache.avro.ipc.NettyTransceiver.getChannel(NettyTransceiver.java:261)
+	at org.apache.avro.ipc.NettyTransceiver.<init>(NettyTransceiver.java:203)
+	at org.apache.avro.ipc.NettyTransceiver.<init>(NettyTransceiver.java:152)
+	at org.apache.flume.api.NettyAvroRpcClient.connect(NettyAvroRpcClient.java:165)
+	... 10 more
+Caused by: java.net.ConnectException: Connection refused: localhost/127.0.0.1:4545
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.jboss.netty.channel.socket.nio.NioClientBoss.connect(NioClientBoss.java:152)
+	at org.jboss.netty.channel.socket.nio.NioClientBoss.processSelectedKeys(NioClientBoss.java:105)
+	at org.jboss.netty.channel.socket.nio.NioClientBoss.process(NioClientBoss.java:79)
+	at org.jboss.netty.channel.socket.nio.AbstractNioSelector.run(AbstractNioSelector.java:337)
+	at org.jboss.netty.channel.socket.nio.NioClientBoss.run(NioClientBoss.java:42)
+	at org.jboss.netty.util.ThreadRenamingRunnable.run(ThreadRenamingRunnable.java:108)
+	at org.jboss.netty.util.internal.DeadLockProofWorker$1.run(DeadLockProofWorker.java:42)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	... 1 more
+2021-05-31 21:18:17,174 INFO sink.AbstractRpcSink: Rpc sink k2: Building RpcClient with hostname: localhost, port: 4545
+2021-05-31 21:18:17,174 INFO sink.AvroSink: Attempting to create Avro Rpc client.
+2021-05-31 21:18:17,174 INFO api.NettyAvroRpcClient: Using default maxIOWorkers
+2021-05-31 21:18:17,183 ERROR flume.SinkRunner: Unable to deliver event. Exception follows.

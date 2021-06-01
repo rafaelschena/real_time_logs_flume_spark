@@ -164,9 +164,11 @@ O exemplo simples abaixo lê os dados da porta 4545 PySpark, armazena em um RDD 
 
 ```
 
-Conforme descrito na [documentação do Apache Spark](https://spark.apache.org/docs/latest/sql-data-sources-avro.html), o módulo spark-avro, necessário para ler o streaming de dados neste formato, é externo ao Spark por padrão, mas pode ser chamado invocando a opção packages conforme a sintaxe abaixo:
+Conforme descrito na [documentação do Apache Spark](https://spark.apache.org/docs/2.2.0/streaming-flume-integration.html), o módulo spark-streaming-flume, necessário para ler o streaming de dados neste formato, é externo ao Spark por padrão, mas pode ser chamado invocando a opção packages conforme a sintaxe abaixo:
 
 ```
-./bin/spark-submit --packages org.apache.spark:spark-avro_2.12:3.1.2 ...
+ ./bin/spark-submit --packages org.apache.spark:spark-streaming-flume_2.11:2.2.0 ...
 ```
 
+Verificar solução apresentada em: https://spark.apache.org/docs/2.2.0/streaming-flume-integration.html
+Corrigir figura
