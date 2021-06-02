@@ -171,4 +171,17 @@ Conforme descrito na [documentação do Apache Spark](https://spark.apache.org/d
 ```
 
 Verificar solução apresentada em: https://spark.apache.org/docs/2.2.0/streaming-flume-integration.html
+
+Status atual:
+- Testado o streaming de dados saindo do Flume através de outro agente Flume, e está OK.
+- Próxima ação: testar o script spark para recebimento de dados gerados pelo telnet.
+- Ação seguinte: conectar o streaming do Flume no Spark
+
+Abas atuais:
+http://flume.apache.org/releases/content/1.9.0/FlumeUserGuide.html#memory-channel
+https://spark.apache.org/docs/2.2.0/streaming-flume-integration.html
+https://spark.apache.org/docs/2.2.0/api/python/pyspark.streaming.html#pyspark.streaming.DStream
++Cap10 do curso de Spark.
+
+
 Corrigir figura

@@ -72,3 +72,15 @@ Caused by: java.net.ConnectException: Connection refused: localhost/127.0.0.1:45
 2021-05-31 21:18:17,174 INFO sink.AvroSink: Attempting to create Avro Rpc client.
 2021-05-31 21:18:17,174 INFO api.NettyAvroRpcClient: Using default maxIOWorkers
 2021-05-31 21:18:17,183 ERROR flume.SinkRunner: Unable to deliver event. Exception follows.
+Erro causado pela falta de um agente recebendo os eventos enviados para a porta 4545. Quando havia "escuta" na porta especificada, o erro não se repetiu.
+
+# 4 - Executando o código com o spark-submit
+Foi obtida a seguinte mensagem de erro:
+SyntaxError: Non-ASCII character '\xc3' in file /home/hadoop/Projeto_6/app.py on line 14, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details
+Causa do erro: arquivo codificado em UTF-8, enquanto o Python tenta interpretar em ASCII
+Resolvido incluindo o seguinte comentário na primeira linha do código # coding=utf-8, para indicar ao Python que o arquivo está em UTF-8.
+
+# 5 - Tentando conectar o Spark com o Flume
+Foi obtida a seguinte mensagem de erro:
+21/06/01 21:13:05 ERROR PythonDStream$$anon$1: Cannot connect to Python process. It's probably dead. Stopping StreamingContext.
+py4j.Py4JException: Cannot obtain a new communication channel
