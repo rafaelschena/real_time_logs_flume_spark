@@ -182,6 +182,3 @@ http://flume.apache.org/releases/content/1.9.0/FlumeUserGuide.html#memory-channe
 https://spark.apache.org/docs/2.2.0/streaming-flume-integration.html
 https://spark.apache.org/docs/2.2.0/api/python/pyspark.streaming.html#pyspark.streaming.DStream
 +Cap10 do curso de Spark.
-
-
-Corrigir figura
